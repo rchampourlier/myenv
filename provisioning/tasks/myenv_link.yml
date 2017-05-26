@@ -1,0 +1,7 @@
+---
+
+- name: Link ~/.myenv dir to /vagrant/myenv
+  file:
+    src: "{{ vagrant_dir }}/myenv"
+    dest: "{{ ansible_env.HOME }}/.myenv"
+    state: link
