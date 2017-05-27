@@ -1,0 +1,7 @@
+---
+
+- name: Install tpm plugin from git
+  git:
+    repo: https://github.com/tmux-plugins/tpm
+    dest: "{{ ansible_env.HOME }}/.tmux/plugins"
+    force: true
