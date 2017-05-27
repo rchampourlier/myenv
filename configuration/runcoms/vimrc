@@ -4,6 +4,7 @@ set noswapfile
 " Load plugins
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
 
 " Key bindings
