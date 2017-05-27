@@ -20,3 +20,5 @@
   tasks:
     - include: tasks/myenv_link.yml
     - include: tasks/timezone.yml
+    - include: tasks/install_vim_plugins.yml
+

@@ -1,2 +1,6 @@
 " disable .swp files
 set noswapfile
+
+" load plugins
+call plug#begin('~/.vim/plugged')
+call plug#end()
