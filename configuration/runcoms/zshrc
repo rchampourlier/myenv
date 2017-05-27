@@ -2,6 +2,8 @@
 # Executes commands at the start of an interactive session.
 #
 export TERM=xterm-256color
+export VISUAL=vim
+export EDITOR="$VISUAL"
 
 # Set variables for Prezto
 source "${ZDOTDIR:-$HOME}/.myenv/configuration/zprezto_pre_init.zsh"
