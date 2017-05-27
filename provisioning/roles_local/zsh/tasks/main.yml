@@ -1,0 +1,53 @@
+---
+
+- name: Install zsh
+  become: yes
+  become_user: root
+  package:
+    name: zsh
+    state: present
+
+- name: Set zsh as default shell
+  become: yes
+  become_user: root
+  user:
+    name: "{{ zsh_user }}"
+    shell: /bin/zsh
+
+- name: Install prezto from git
+  git:
+    repo: https://github.com/sorin-ionescu/prezto.git
+    dest: "{{ ansible_env.HOME }}/.zprezto/"
+    track_submodules: true
+    force: true
+    update: false
+
+- name: Install prezto dotfiles
+  file:
+    src: "{{ item }}"
+    dest: "{{ ansible_env.HOME }}/.{{ item | basename }}"
+    state: link
+  with_fileglob: "{{ ansible_env.HOME}}/.zprezto/runcoms/*"
+  when: item|basename != "README.md"
+
+- name: Install powerlevel9k zsh theme from git
+  git:
+    repo: "https://github.com/bhilburn/powerlevel9k.git"
+    dest: "{{ ansible_env.HOME}}/.zprezto/modules/prompt/external/powerlevel9k"
+    force: true
+
+- name: Link powerlevel9k theme
+  file:
+    src: "{{ ansible_env.HOME}}/.zprezto/modules/prompt/external/powerlevel9k/powerlevel9k.zsh-theme"
+    dest: "{{ ansible_env.HOME}}/.zprezto/modules/prompt/functions/prompt_powerlevel9k_setup"
+    state: link
+    force: true
+
+- name: Install myenv dotfiles
+  file:
+    src: "{{ item }}"
+    dest: "{{ ansible_env.HOME }}/.{{ item | basename }}"
+    state: link
+    force: true
+  with_fileglob: "{{ myenv_dir }}/configuration/runcoms/*"
+

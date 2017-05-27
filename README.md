@@ -24,4 +24,13 @@ git clone https://github.com/rchampourlier/my-env.git
 my-env/init.sh
 ```
 
-## Choices
+## Content
+
+- Shell: zsh, prezto and powerlevel9k
+- Ruby, using RVM
+
+## Reasons
+
+### Shell
+
+I prefer to continue using **zsh**: it seems to be the most used and I love to have options and a big community.

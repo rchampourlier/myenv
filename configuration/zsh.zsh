@@ -1,1 +1,1 @@
-source "${ZDOTDIR:-$HOME}/.myenv/prompt.zsh"
+source "${ZDOTDIR:-$HOME}/.myenv/configuration/zsh/prompt.zsh"

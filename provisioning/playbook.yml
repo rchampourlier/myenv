@@ -1,0 +1,20 @@
+---
+
+- hosts: all
+
+  vars:
+    guest_user: "ubuntu"
+    zsh_user: "{{ guest_user }}"
+    vagrant_dir: "/vagrant"
+    myenv_dir: "{{ vagrant_dir }}/myenv"
+
+  roles:
+    - zsh
+    - { role: rvm1-ansible,
+        tags: ruby,
+        rvm1_rubies: ["ruby-2.4", "ruby-2.3"],
+        rvm1_user: "{{ guest_user }}"
+      }
+
+  tasks:
+    - include: tasks/myenv_link.yml
