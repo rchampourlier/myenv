@@ -10,6 +10,7 @@
 
   roles:
     - zsh
+    - vim
     - { role: rvm1-ansible,
         tags: ruby,
         rvm1_rubies: ["ruby-2.4", "ruby-2.3"],
