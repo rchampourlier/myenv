@@ -1,11 +1,13 @@
-" disable .swp files
+" Disable .swp files
 set noswapfile
 
-" load plugins
+" Load plugins
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 call plug#end()
 
-" fzf
+" Key bindings
+
+" Key bindings - Search files
 nnoremap <silent> ,f :FZF<CR>
 
