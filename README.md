@@ -1,36 +1,45 @@
-# my-env (another development environment setup option)
+# myenv (another development environment setup option)
 
-## Introduction
+Build your development environment:
 
-I was using a full-fledged setup provided by YADR. However, it was kinda of slow and I didn't know nor understood most of its configuration. Some things were not working perfectly (e.g. ctags), and not having them configured in the first place made it daunting to fix them. Another motivation was to improve my knowledge of the tools.
+- Use Vagrant to contain your environment inside a dedicated machine (local VM, remote server...)
+- Provision the environment using Ansible (for programs, libraries, development tools...)
+- Load your dotfiles directly from the repo
 
-In order to continue working with the same level of proficiency, in particular for work, I decided to build a new environment contained in a dedicated server, and only migrate my personal projects for now. This would allow me to separate work from personal projects by moving them to this dedicated container. I would start with a local container first (Virtual Machine), but I would then be able to move it to a remote server to enable working from any internet-connected machine with a terminal.
+The environment is provisioned with my personal setup:
 
-## General principle
+- Shell: zsh, prezto and powerlevel9k
+- Some Ruby versions (using RVM)
+- Vim (8, installed from the source). With vim-plug and custom settings.
 
-- Creates a local environment within a Vagrant-manager Virtual Machine.
-- Requires Vagrant and a provider (VirtualBox by default) to be provisioned.
-- Provisions the Vagrant box using ansible-local.
+## Prerequisites
 
-## How to
+- Vagrant must be installed and working with a default provider
 
-**Prerequisites**
+## Getting started
 
-- Install Vagrant
+Provision the environment and connect to it:
 
 ```
 cd some/path
-git clone https://github.com/rchampourlier/my-env.git
-my-env/init.sh
+git clone https://github.com/rchampourlier/myenv.git
+myenv/init.sh
+vagrant ssh
 ```
 
-## Content
+## How to...
 
-- Shell: zsh, prezto and powerlevel9k
-- Ruby, using RVM
+### Add a vim plugin
 
-## Reasons
+- Edit `configuration/runcoms/vimrc` and add the desired `Plug...` in the "Load plugins" section.
+- Run `myenv/provision.sh` (from the host)
 
-### Shell
+### Upgrade
 
-I prefer to continue using **zsh**: it seems to be the most used and I love to have options and a big community.
+```
+myenv/provision.sh
+```
+
+## Some explanations
+
+- Why did I chose **zsh**: it seems to be the most used and I love to have options and a big community.
