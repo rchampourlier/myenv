@@ -6,7 +6,7 @@ export TERM=xterm-256color
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
-# Must be before .zprezto/init.sh
+# Use the correct font icons (must be before prezto/init)
 POWERLEVEL9K_MODE='awesome-patched'
 
 # Source Prezto
