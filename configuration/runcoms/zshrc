@@ -1,3 +1,4 @@
+
 #
 # Executes commands at the start of an interactive session.
 #
@@ -19,9 +20,8 @@ fi
 # Source font variables
 source "${ZDOTDIR:-$HOME}/.myenv/fonts/Droid+Sans+Mono+Awesome.sh"
 
-# =============
-# Customize zsh
-# =============
+# ==================
+# ZSH: customization
 
 # zsh - prompt
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
@@ -45,6 +45,36 @@ POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='red'
 POWERLEVEL9K_STATUS_VERBOSE=false
 POWERLEVEL9K_STATUS_ERROR_FOREGROUND='red'
 
-# ===================
-# Customize zsh - END
-# ===================
+# ZSH: customization - END
+# ========================
+
+# ============================================
+# TMUX: session sharing, autostart and aliases
+
+export TMUX_SOCKET=/tmp/tmux_default_socket
+export TMUX_DEFAULT_SESSION=main
+
+# Use a default socket for tmux commands. Enables sharing
+# tmux over several SSH connetions and keeps the server
+# active when disconnecting.
+_tmux_use_socket="-S $TMUX_SOCKET"
+alias tmux='tmux -S /tmp/tmux_default_socket'
+
+# Creating new session or attaching to existing one
+# if not already in tmux.
+# Using exec gives control to tmux, exiting the
+# session (and thus the SSH if connected over SSH)
+# when detaching.
+if [[ -z "$TMUX" ]]; then
+	if ! tmux has-session 2> /dev/null; then
+		exec tmux new-session -s $TMUX_DEFAULT_SESSION
+	else
+		exec tmux attach-session -t $TMUX_DEFAULT_SESSION
+	fi
+fi
+
+# TMUX: session sharing, autostart and aliases - END
+# ==================================================
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
