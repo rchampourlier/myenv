@@ -16,9 +16,9 @@
         rvm1_rubies: ["ruby-2.4", "ruby-2.3"],
         rvm1_user: "{{ guest_user }}"
       }
+    - vim_plugins
 
   tasks:
     - include: tasks/myenv_link.yml
     - include: tasks/timezone.yml
-    - include: tasks/install_vim_plugins.yml
 
