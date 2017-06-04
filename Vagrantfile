@@ -70,7 +70,7 @@ Vagrant.configure("2") do |config|
   # Provisioning with ansible-local
   # Run Ansible from the Vagrant VM
   config.vm.provision 'ansible_local' do |ansible|
-    ansible.playbook = 'Vagrant-Provisioning/playbook.yml'
+    ansible.playbook = 'myenv/provisioning/playbook.yml'
   end
 
   config.ssh.forward_agent = true

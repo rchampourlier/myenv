@@ -25,6 +25,3 @@ do
   cd $DIR/provisioning/roles && ln -s ../roles_local/$role_name $role_name
 done
 cd $ROOT
-
-# Provisioning the VM
-vagrant provision

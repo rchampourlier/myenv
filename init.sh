@@ -5,7 +5,8 @@ DIR="./myenv"
 
 # Link vagrant-related files
 ln -sf $DIR/Vagrantfile .
-ln -sf $DIR/provisioning $DIR/Vagrant-Provisioning
 
 # Handle provisioning
-$DIR/provision.sh
+$DIR/prepare_provisioning.sh
+
+vagrant up
