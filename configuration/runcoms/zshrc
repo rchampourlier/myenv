@@ -1,6 +1,8 @@
+# ~/.zshrc
 #
 # Executes commands at the start of an interactive session.
-#
+# ============================================
+
 export TERM=xterm-256color
 export VISUAL=vim
 export EDITOR="$VISUAL"
@@ -19,8 +21,9 @@ fi
 # Source font variables
 source "${ZDOTDIR:-$HOME}/.myenv/fonts/Droid+Sans+Mono+Awesome.sh"
 
-# ==================
+# ============================================
 # ZSH: customization
+# ============================================
 
 # zsh - prompt
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
@@ -44,11 +47,9 @@ POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='red'
 POWERLEVEL9K_STATUS_VERBOSE=false
 POWERLEVEL9K_STATUS_ERROR_FOREGROUND='red'
 
-# ZSH: customization - END
-# ========================
-
 # ============================================
 # TMUX: session sharing, autostart and aliases
+# ============================================
 
 export TMUX_SOCKET=/tmp/tmux_default_socket
 export TMUX_DEFAULT_SESSION=main
@@ -74,8 +75,6 @@ alias tmux='tmux -S /tmp/tmux_default_socket'
 # Disabled because using exec makes the tmux server
 # go down when detaching.
 
-# TMUX: session sharing, autostart and aliases - END
-# ==================================================
 # ============================================
 # GO
 # ============================================
@@ -83,8 +82,13 @@ export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$PATH
 
+# ============================================
+# RUBY
+# ============================================
+
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
 
 # Load RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
+
