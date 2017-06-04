@@ -32,14 +32,12 @@ vagrant ssh
 ### Add a vim plugin
 
 - Edit `configuration/runcoms/vimrc` and add the desired `Plug...` in the "Load plugins" section.
-- Run `myenv/provision.sh` (from the host)
+- Run `vagrant provision` (on the host)
 
 ### Upgrade
 
-```
-myenv/provision.sh
-```
+- Run `vagrant provision` (on the host)
 
-## Some explanations
+## On choices
 
 - Why did I chose **zsh**: it seems to be the most used and I love to have options and a big community.
