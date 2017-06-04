@@ -12,6 +12,8 @@ The environment is provisioned with my personal setup:
 - Some Ruby versions (using RVM)
 - Vim (8, installed from the source). With vim-plug and custom settings.
 
+**NB: this environment is provisioned _for me_! Though you could totally use it to build your own environment, I recommend you to fork it and adjust it to your needs.**
+
 ## Prerequisites
 
 - Vagrant must be installed and working with a default provider
@@ -38,6 +40,6 @@ vagrant ssh
 
 - Run `vagrant provision` (on the host)
 
-## On choices
+## Known limitations
 
-- Why did I chose **zsh**: it seems to be the most used and I love to have options and a big community.
+- Several Ansible roles are really simple and, while they should generally do the job of provisioning some component, they may not be idem-potent, efficient, or be able to perform upgrades. Improving these roles or relying on community-maintained ones is a todo.
