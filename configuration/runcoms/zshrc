@@ -1,4 +1,3 @@
-
 #
 # Executes commands at the start of an interactive session.
 #
@@ -65,13 +64,15 @@ alias tmux='tmux -S /tmp/tmux_default_socket'
 # Using exec gives control to tmux, exiting the
 # session (and thus the SSH if connected over SSH)
 # when detaching.
-if [[ -z "$TMUX" ]]; then
-	if ! tmux has-session 2> /dev/null; then
-		exec tmux new-session -s $TMUX_DEFAULT_SESSION
-	else
-		exec tmux attach-session -t $TMUX_DEFAULT_SESSION
-	fi
-fi
+# if [[ -z "$TMUX" ]]; then
+# 	if ! tmux has-session 2> /dev/null; then
+# 		exec tmux new-session -s $TMUX_DEFAULT_SESSION
+# 	else
+# 		exec tmux attach-session -t $TMUX_DEFAULT_SESSION
+# 	fi
+# fi
+# Disabled because using exec makes the tmux server
+# go down when detaching.
 
 # TMUX: session sharing, autostart and aliases - END
 # ==================================================
