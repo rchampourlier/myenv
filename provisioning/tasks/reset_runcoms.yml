@@ -1,0 +1,19 @@
+---
+
+# This is needed because we need to place runcoms
+# early (through links) so that roles rely on them
+# (e.g. for vim plugins). However, the plugins
+# installation may write some of these runcoms
+# we overrode, so we apply them again at the end.
+
+- name: Override runcoms (again)
+  file:
+    src: "{{ item }}"
+    dest: "{{ ansible_env.HOME }}/.{{ item | basename }}"
+    state: link
+    force: true
+  with_fileglob: "{{ myenv_dir }}/configuration/runcoms/*"
+
+- name: Reset changes
+  shell: "cd {{ myenv_dir }} && git checkout -- {{ item }}"
+  with_fileglob: "{{ myenv_dir }}/configuration/runcoms/*"

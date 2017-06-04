@@ -21,4 +21,5 @@
   tasks:
     - include: tasks/myenv_link.yml
     - include: tasks/timezone.yml
+    - include: tasks/reset_runcoms.yml
 
