@@ -7,6 +7,11 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
 
+" Tabs & indentation
+set expandtab
+set shiftwidth=2
+set softtabstop=2
+
 " Key bindings
 
 " Key bindings - Search files
