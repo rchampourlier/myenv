@@ -44,6 +44,7 @@ Vagrant.configure("2") do |config|
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
+  config.vm.synced_folder "../myenv", "/home/ubuntu/.myenv"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -70,7 +71,7 @@ Vagrant.configure("2") do |config|
   # Provisioning with ansible-local
   # Run Ansible from the Vagrant VM
   config.vm.provision 'ansible_local' do |ansible|
-    ansible.playbook = 'myenv/provisioning/playbook.yml'
+    ansible.playbook = '/home/ubuntu/.myenv/provisioning/playbook.yml'
   end
 
   config.ssh.forward_agent = true

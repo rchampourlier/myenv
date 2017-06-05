@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-ROOT=$(pwd)
+ROOT=$(pwd)/..
 DIR="$ROOT/myenv"
 
 # Clear roles directory (though it should be)

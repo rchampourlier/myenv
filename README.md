@@ -20,12 +20,17 @@ The environment is provisioned with my personal setup:
 
 ## Getting started
 
-Provision the environment and connect to it:
+If you want to have several environment, e.g. one for work, one for personal projects, you can have the following directories:
+
+/some/path/myenv
+/some/path/work
+/some/path/personal
 
 ```
-cd some/path
+cd /some/path
 git clone https://github.com/rchampourlier/myenv.git
-myenv/init.sh
+cd work
+../myenv/init.sh
 vagrant ssh
 ```
 

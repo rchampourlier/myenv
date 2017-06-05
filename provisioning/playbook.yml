@@ -6,7 +6,7 @@
     guest_user: "ubuntu"
     zsh_user: "{{ guest_user }}"
     vagrant_dir: "/vagrant"
-    myenv_dir: "{{ vagrant_dir }}/myenv"
+    myenv_dir: "{{ ansible_env.HOME }}/.myenv"
 
   roles:
     - zsh
@@ -16,14 +16,13 @@
         rvm1_rubies: ["ruby-2.4", "ruby-2.3"],
         rvm1_user: "{{ guest_user }}"
       }
-    - { 
+    - {
         role: ansible-go,
         become: yes
       }
     - vim_plugins
 
   tasks:
-    - include: tasks/myenv_link.yml
     - include: tasks/timezone.yml
     - include: tasks/reset_runcoms.yml
 
