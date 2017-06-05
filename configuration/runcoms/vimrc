@@ -5,6 +5,7 @@ set noswapfile
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'itchyny/lightline.vim'
 call plug#end()
 
 " Tabs & indentation
@@ -17,3 +18,8 @@ set softtabstop=2
 " Key bindings - Search files
 nnoremap <silent> ,f :FZF<CR>
 
+" lightline
+set laststatus=2
+let g:lightline = {
+  \ 'colorscheme': 'solarized',
+  \ }
