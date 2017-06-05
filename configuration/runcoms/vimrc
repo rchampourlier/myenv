@@ -4,6 +4,7 @@ set nocompatible
 set noswapfile
 
 " Load plugins
+""""""""""""""
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'christoomey/vim-tmux-navigator'
@@ -16,11 +17,17 @@ set shiftwidth=2
 set softtabstop=2
 
 " Key bindings
+""""""""""""""
+
 
 " Key bindings - Search files
 nnoremap <silent> ,f :FZF<CR>
 
-" lightline
+
+" Plugins config
+""""""""""""""""
+
+" Plugin - lightline
 set laststatus=2
 let g:lightline = {
   \ 'colorscheme': 'solarized',
