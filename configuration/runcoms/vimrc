@@ -9,6 +9,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'itchyny/lightline.vim'
+Plug 'scrooloose/nerdtree'
 call plug#end()
 
 " Tabs & indentation
@@ -27,6 +28,9 @@ let mapleader=","
 
 " Key bindings - Search files
 nnoremap <silent> <leader>f :FZF<CR>"
+
+" Key bindings - NERDtree
+nmap <leader>n :NERDTreeToggle<cr>
 
 " Key bindings - Misc
 
