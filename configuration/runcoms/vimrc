@@ -28,6 +28,12 @@ let mapleader=","
 " Key bindings - Search files
 nnoremap <silent> <leader>f :FZF<CR>"
 
+" Key bindings - Misc
+
+" escapes from insert mode
+imap jk <esc>
+imap kj <esc>
+imap <C-s> <esc>:w<cr>
 
 " Plugins config
 """"""""""""""""
