@@ -9,6 +9,7 @@
     myenv_dir: "{{ ansible_env.HOME }}/.myenv"
 
   roles:
+    - system
     - zsh
     - vim
     - { role: rvm1-ansible,

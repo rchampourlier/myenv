@@ -41,6 +41,11 @@ vagrant ssh
 - Edit `configuration/runcoms/vimrc` and add the desired `Plug...` in the "Load plugins" section.
 - Run `vagrant provision` (on the host)
 
+### Install a new Ubuntu package
+
+- If it's a system common package, add it to `prvosioning/roles_local/system`.
+- Otherwise, create the appropriate role and add it to `provisioning/playbook.yml`.
+
 ### Upgrade
 
 - Run `vagrant provision` (on the host)
