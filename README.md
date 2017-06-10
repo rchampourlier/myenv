@@ -16,7 +16,8 @@ The environment is provisioned with my personal setup:
 
 ## Prerequisites
 
-- Vagrant must be installed and working with a default provider
+- Vagrant must be installed and working with a default provider.
+- You should user iTerm as a terminal application on MacOS X. To have your tmux buffer automatically copied to your macOS' clipboard, simply enable the "Applications in terminal may access clipboard" option in iTerm.
 
 ## Getting started
 
