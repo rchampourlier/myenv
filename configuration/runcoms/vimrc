@@ -19,6 +19,10 @@ set expandtab
 set shiftwidth=2
 set softtabstop=2
 
+" Tabs & indentation for Go
+autocmd FileType go setlocal shiftwidth=8 tabstop=8 softtabstop=8
+autocmd FileType go setlocal noexpandtab
+
 " Solarized theme
 """""""""""""""""
 syntax enable
