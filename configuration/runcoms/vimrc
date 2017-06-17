@@ -47,6 +47,10 @@ imap jk <esc>
 imap kj <esc>
 imap <C-s> <esc>:w<cr>
 
+" Bind `t` to go to topic in help files
+autocmd Filetype help nnoremap t <C-]>
+autocmd Filetype help nnoremap <buffer> q :q<CR>
+
 " Plugins config
 """"""""""""""""
 
