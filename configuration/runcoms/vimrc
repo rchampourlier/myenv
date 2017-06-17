@@ -11,6 +11,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'itchyny/lightline.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'w0rp/ale'
+Plug 'mileszs/ack.vim'
 call plug#end()
 
 " Tabs & indentation
@@ -48,3 +49,13 @@ set laststatus=2
 let g:lightline = {
   \ 'colorscheme': 'solarized',
   \ }
+
+" Plugin - vim.ack
+" Using ag instead of Ack
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep --smart-case'
+endif
+cnoreabbrev ag Ack
+cnoreabbrev aG Ack
+cnoreabbrev Ag Ack
+cnoreabbrev AG Ack
