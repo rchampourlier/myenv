@@ -12,6 +12,11 @@ Plug 'itchyny/lightline.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'w0rp/ale'
 Plug 'mileszs/ack.vim'
+
+" for vim
+Plug 'fatih/vim-go'
+Plug 'vim-jp/vim-go-extra' " for :Fmt
+
 call plug#end()
 
 " Tabs & indentation
@@ -19,7 +24,7 @@ set expandtab
 set shiftwidth=2
 set softtabstop=2
 
-" Tabs & indentation for Go
+" Tabs & indentation for Golang
 autocmd FileType go setlocal shiftwidth=8 tabstop=8 softtabstop=8
 autocmd FileType go setlocal noexpandtab
 
@@ -73,3 +78,7 @@ cnoreabbrev ag Ack
 cnoreabbrev aG Ack
 cnoreabbrev Ag Ack
 cnoreabbrev AG Ack
+
+" Plugin - ale
+" enable 'go build' linter
+let g:ale_linters = {'go': ['golint', 'gofmt', 'go vet', 'go build']}
