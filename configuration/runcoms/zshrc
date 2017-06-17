@@ -75,6 +75,14 @@ alias tmux='tmux -S /tmp/tmux_default_socket'
 # Disabled because using exec makes the tmux server
 # go down when detaching.
 
+
+# ============================================
+# FZF
+# ============================================
+
+# Setting ag as the default source for fzf
+export FZF_DEFAULT_COMMAND='ag -g ""'
+
 # ============================================
 # GO
 # ============================================
