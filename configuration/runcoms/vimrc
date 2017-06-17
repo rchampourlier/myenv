@@ -19,6 +19,12 @@ set expandtab
 set shiftwidth=2
 set softtabstop=2
 
+" Solarized theme
+"""""""""""""""""
+syntax enable
+set background=dark
+colorscheme solarized
+
 " Key bindings
 """"""""""""""
 
