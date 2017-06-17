@@ -21,6 +21,14 @@
         role: ansible-go,
         become: yes
       }
+    - {
+        role: ansible-nvm,
+        nvm: {
+          user: "{{ guest_user }}",
+          version: 'v0.33.2',
+          node_version: 'v6.11.0'
+        }
+      }
     - vim_plugins
 
   tasks:

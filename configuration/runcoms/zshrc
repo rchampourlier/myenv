@@ -100,3 +100,5 @@ export PATH="$PATH:$HOME/.rvm/bin"
 # Load RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
 
+# Load NVM
+source ~/.nvm/nvm.sh
