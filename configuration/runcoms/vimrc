@@ -64,10 +64,37 @@ autocmd Filetype help nnoremap <buffer> q :q<CR>
 """"""""""""""""
 
 " Plugin - lightline
-set laststatus=2
 let g:lightline = {
-  \ 'colorscheme': 'solarized',
-  \ }
+      \ 'colorscheme': 'solarized',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'readonly': 'MyReadonly',
+      \   'filename': 'MyFilename',
+      \ },
+      \ 'separator': { 'left': '⮀', 'right': '⮂' },
+      \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
+      \ }
+
+function! MyReadonly()
+  if &filetype == "help"
+    return ""
+  elseif &readonly
+    return "⭤ "
+  else
+    return ""
+  endif
+endfunction
+
+function! MyFilename()
+  return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+       \ ('' != expand('%') ? expand('%') : '[NoName]')
+endfunction
+
+" Use status bar even with single buffer
+set laststatus=2
 
 " Plugin - vim.ack
 " Using ag instead of Ack
