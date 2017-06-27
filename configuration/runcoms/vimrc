@@ -13,9 +13,12 @@ Plug 'scrooloose/nerdtree'
 Plug 'w0rp/ale'
 Plug 'mileszs/ack.vim'
 
-" for vim
+" for go
 Plug 'fatih/vim-go'
 Plug 'vim-jp/vim-go-extra' " for :Fmt
+
+" for elm
+Plug 'elmcast/elm-vim'
 
 call plug#end()
 
