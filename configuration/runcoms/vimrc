@@ -47,6 +47,29 @@ let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
+" Improve autocompletion
+" See http://vim.wikia.com/wiki/VimTip1386
+""""""""""""""""""""""""""""""""""""""""""
+set completeopt=longest,menuone
+
+" Use enter to select
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Simulate a down on opening menu
+inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
+  \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
+  \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+
+" open omni completion menu closing previous if open and opening new menu
+" without changing the text
+inoremap <expr> <C-Space> (pumvisible() ? (col('.') > 1 ? '<Esc>i<Right>' : '<Esc>i') : '') .
+            \ '<C-x><C-o><C-r>=pumvisible() ?  "\<lt>C-n>\<lt>C-p>\<lt>Down>" : ""<CR>'
+" open user completion menu closing previous if open and opening new menu
+" without changing the text
+inoremap <expr> <S-Space> (pumvisible() ? (col('.') > 1 ? '<Esc>i<Right>' : '<Esc>i') : ') .
+            \ '<C-x><C-u><C-r>=pumvisible() ? "\<lt>C-n>\<lt>C-p>\<lt>Down>" : ""<CR>''))'"))
+
 " Key bindings
 """"""""""""""
 
@@ -72,6 +95,9 @@ imap <C-s> <esc>:w<cr>
 " Bind `t` to go to topic in help files
 autocmd Filetype help nnoremap t <C-]>
 autocmd Filetype help nnoremap <buffer> q :q<CR>
+
+" rebind omnicompletion to <C-o>
+imap <C-o> <C-x><C-o>
 
 " Plugins config
 """"""""""""""""
