@@ -30,6 +30,7 @@
         }
       }
     - vim_plugins
+    - node_modules
 
   tasks:
     - include: tasks/timezone.yml
