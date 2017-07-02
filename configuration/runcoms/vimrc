@@ -6,6 +6,8 @@ set noswapfile
 " Load plugins
 """"""""""""""
 call plug#begin('~/.vim/plugged')
+
+" basics
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'itchyny/lightline.vim'
@@ -36,15 +38,23 @@ set expandtab
 set shiftwidth=2
 set softtabstop=2
 
+" line numbers
+set number
+
 " Tabs & indentation for Golang
 autocmd FileType go setlocal shiftwidth=8 tabstop=8 softtabstop=8
 autocmd FileType go setlocal noexpandtab
 
-" Solarized theme
+" solarized theme
 """""""""""""""""
 syntax enable
 set background=dark
 colorscheme solarized
+
+" custom colors
+"""""""""""""""
+
+highlight SignColumn ctermbg=Black
 
 " Syntax coloration
 """""""""""""""""""
@@ -148,6 +158,9 @@ cnoreabbrev AG Ack
 " Plugin - ale
 " enable 'go build' linter
 let g:ale_linters = {'go': ['golint', 'gofmt', 'go vet', 'go build']}
+let g:ale_sign_error = ''
+" let g:ale_sign_warning = ' '
+let g:ale_sign_warning = ''
 
 " Plugin - elm-vim
 " enable elm-format on save
