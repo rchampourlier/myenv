@@ -16,7 +16,8 @@ Plug 'mileszs/ack.vim'
 " for go
 Plug 'fatih/vim-go'
 Plug 'vim-jp/vim-go-extra' " for :Fmt
-
+Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
+"
 " for elm
 Plug 'elmcast/elm-vim'
 
@@ -36,6 +37,15 @@ autocmd FileType go setlocal noexpandtab
 syntax enable
 set background=dark
 colorscheme solarized
+
+" Syntax coloration
+"""""""""""""""""""
+" Golang
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
 
 " Key bindings
 """"""""""""""

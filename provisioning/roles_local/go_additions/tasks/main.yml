@@ -1,0 +1,8 @@
+---
+
+- name: Install some additions for Golang
+  command: go get -u github.com/nsf/gocode
+
+- name: Install vim-go binaries
+  command: vim +GoInstallBinaries +qall
+
