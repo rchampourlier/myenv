@@ -12,6 +12,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'w0rp/ale'
 Plug 'mileszs/ack.vim'
+Plug 'kien/ctrlp.vim'
 
 " vim-easytags dependency
 Plug 'xolox/vim-misc'
@@ -77,22 +78,14 @@ inoremap <expr> <C-Space> (pumvisible() ? (col('.') > 1 ? '<Esc>i<Right>' : '<Es
 inoremap <expr> <S-Space> (pumvisible() ? (col('.') > 1 ? '<Esc>i<Right>' : '<Esc>i') : ') .
             \ '<C-x><C-u><C-r>=pumvisible() ? "\<lt>C-n>\<lt>C-p>\<lt>Down>" : ""<CR>''))'"))
 
-" Key bindings
-""""""""""""""
+" Key bindings (non-plugin related)
+"""""""""""""""""""""""""""""""""""
 
 " Change leader to a comma because the backslash is too far away
 " That means all \x commands turn into ,x
 " The mapleader has to be set before vundle starts loading all 
 " the plugins.
 let mapleader=","
-
-" Key bindings - Search files
-nnoremap <silent> <leader>f :FZF<CR>"
-
-" Key bindings - NERDtree
-nmap <leader>n :NERDTreeToggle<cr>
-
-" Key bindings - Misc
 
 " escapes from insert mode
 imap jk <esc>
@@ -159,3 +152,18 @@ let g:ale_linters = {'go': ['golint', 'gofmt', 'go vet', 'go build']}
 " Plugin - elm-vim
 " enable elm-format on save
 let g:elm_format_autosave = 1
+
+" Plugin - ctrlp
+let g:ctrlp_extensions = ['tag']
+
+" Plugin - fzf
+nnoremap <silent> <leader>f :FZF<CR>"
+
+" Plugin - NERDtree
+nmap <leader>n :NERDTreeToggle<CR>
+
+" Plugin - ctrlp
+nmap <leader>t :CtrlPTag<CR>
+
+" Plugin - Tagbar
+nmap <leader>b :TagbarToggle<CR>
