@@ -1,2 +1,2 @@
 /provisioning/roles
-/provisioning/playbook.retry
+/provisioning/playbook*.retry

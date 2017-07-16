@@ -27,12 +27,39 @@ If you want to have several environment, e.g. one for work, one for personal pro
 /some/path/work
 /some/path/personal
 
+### On a local VM (using Vagrant and VirtualBox provider)
+
 ```
-cd /some/path
-git clone https://github.com/rchampourlier/myenv.git
-cd work
-../myenv/init.sh
+# Init
+git clone https://github.com/rchampourlier/myenv.git /some/path/myenv
+cd /some/path/work
+../myenv/init_vagrant.sh
+
+# Connect
 vagrant ssh
+
+# On the guest, connected as ubuntu ($GUEST_USER)
+export GUEST_USER=ubuntu
+export MYENV_BRANCH=master
+curl https://raw.githubusercontent.com/rchampourlier/myenv/$MYENV_BRANCH/start_vagrant.sh > start_vagrant.sh && /bin/bash start_vagrant.sh
+```
+
+### On a remote server
+
+```
+# Connected as root
+export GUEST_USER=ubuntu
+export MYENV_BRANCH=master
+curl https://raw.githubusercontent.com/rchampourlier/myenv/$MYENV_BRANCH/start_remote.sh > start_remote.sh && /bin/bash start_remote.sh
+```
+
+To connect easily and forward your SSH keys, edit your `~/.ssh/config` file and add this:
+
+```
+Host myenv
+  Hostname 123.456.789.012
+  User ubuntu
+  ForwardAgent yes
 ```
 
 ## How to...
@@ -44,13 +71,24 @@ vagrant ssh
 
 ### Install a new Ubuntu package
 
-- If it's a system common package, add it to `prvosioning/roles_local/system`.
+- If it's a system common package, add it to `provisioning/roles_local/system`.
 - Otherwise, create the appropriate role and add it to `provisioning/playbook.yml`.
 
-### Upgrade
+### Update / replay provisioning
 
-- Run `vagrant provision` (on the host)
+This replays the Ansible playbooks:
+
+```
+```
+
+## Troubleshooting
+
+### Ansible setup failing at 1st run
+
+When you run the `start_remote` and `start_vagrant` scripts for the 1st time on a given machine, the Ansible provisioning script may fail before the end. This is due to the fact that some tasks require some prerequisites installed by Ansible to be loaded. For now, the solution is to log out and log in back and replay the provisioning scripts (see "Update / replay provisioning" above).
+
+A more appropriate solution would be to split the provisioning in two phases, 1. bootstrapping, 2. provisioning, and logout/login after bootstrapping.
 
 ## Known limitations
 
-- Several Ansible roles are really simple and, while they should generally do the job of provisioning some component, they may not be idem-potent, efficient, or be able to perform upgrades. Improving these roles or relying on community-maintained ones is a todo.
+Several Ansible roles are really simple and, while they should generally do the job of provisioning some component, they may not be idem-potent, efficient, or be able to perform upgrades. Improving these roles or relying on community-maintained ones is a todo.

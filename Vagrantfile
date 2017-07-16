@@ -6,6 +6,10 @@
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
 Vagrant.configure("2") do |config|
+  USER = 'ubuntu'.freeze
+  # We use 'ubuntu' as user because it's the username configured by
+  # default for the Vagrant "ubuntu/xenial64" we use.
+
   # The most common configuration options are documented and commented below.
   # For a complete reference, please see the online documentation at
   # https://docs.vagrantup.com.
@@ -47,20 +51,25 @@ Vagrant.configure("2") do |config|
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
-  config.vm.synced_folder "../myenv", "/home/ubuntu/.myenv"
+  # config.vm.synced_folder "../myenv", "/home/#{USER}/myenv"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:
   #
-  # config.vm.provider "virtualbox" do |vb|
-  #   # Display the VirtualBox GUI when booting the machine
-  #   vb.gui = true
-  #
-  #   # Customize the amount of memory on the VM:
-  #   vb.memory = "1024"
-  # end
-  #
+
+  machine_name = File.expand_path('.').split('/').last.gsub('_', '')
+  config.vm.define machine_name
+
+  config.vm.provider "virtualbox" do |vb|
+    # Display the VirtualBox GUI when booting the machine
+    # vb.gui = true
+
+    # Customize the amount of memory on the VM:
+    vb.memory = "2048"
+    vb.cpus = 4
+  end
+
   # View the documentation for the provider you are using for more
   # information on available options.
 
@@ -73,9 +82,9 @@ Vagrant.configure("2") do |config|
 
   # Provisioning with ansible-local
   # Run Ansible from the Vagrant VM
-  config.vm.provision 'ansible_local' do |ansible|
-    ansible.playbook = '/home/ubuntu/.myenv/provisioning/playbook.yml'
-  end
+  # config.vm.provision 'ansible_local' do |ansible|
+  #   ansible.playbook = "/home/#{USER}/myenv/provisioning/playbook.yml"
+  # end
 
   config.ssh.forward_agent = true
 end

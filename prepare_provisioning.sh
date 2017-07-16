@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-ROOT=$(pwd)/..
-DIR="$ROOT/myenv"
+DIR="$HOME/myenv"
 
 # Clear roles directory (though it should be)
 rm -Rf $DIR/provisioning/roles
@@ -14,7 +13,7 @@ while read role || [[ -n $role ]]; do
   echo "Cloning role $role"
   cd $DIR/provisioning/roles && git clone $role
 done <$DIR/provisioning/roles_dep.txt
-cd $ROOT
+cd $HOME
 
 # Link local roles
 LOCAL_ROLES=$DIR/provisioning/roles_local/*
@@ -24,4 +23,4 @@ do
   echo "Linking local role $role_name"
   cd $DIR/provisioning/roles && ln -s ../roles_local/$role_name $role_name
 done
-cd $ROOT
+cd $HOME
