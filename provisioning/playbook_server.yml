@@ -11,7 +11,7 @@
     ubuntu_common_optional_packages:
       - mosh
 
-    ubuntu_common_ssh_port: 6677
+    ubuntu_common_ssh_port: 22
     ubuntu_common_mosh_from_port: 60000
     ubuntu_common_mosh_to_port: 60010
 
