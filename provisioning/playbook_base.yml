@@ -7,7 +7,6 @@
     zsh_user: "{{ guest_user }}"
     vagrant_dir: "/vagrant"
     myenv_dir: "{{ ansible_env.HOME }}/myenv"
-    node_package: "node-v8.2.1-linux-x64"
 
   roles:
     - system
@@ -24,7 +23,12 @@
       }
     - vim_plugins
     - {
-        role: node,
+        role: ansible-nvm,
+        nvm: {
+          user: "{{ guest_user }}",
+          version: 'v0.33.2',
+          node_version: 'v6.11.0'
+        },
         become: yes
       }
     - go_additions
