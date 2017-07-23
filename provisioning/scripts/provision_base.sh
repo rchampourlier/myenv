@@ -8,10 +8,6 @@ rm -Rf $HOME/myenv
 git clone https://github.com/rchampourlier/myenv.git $HOME/myenv
 cd $HOME/myenv && git fetch && git checkout $MYENV_BRANCH
 
-echo "Creating a dev directory"
-mkdir $HOME/dev
-cd $HOME/dev
-
 echo "Prepare provisioning"
 $HOME/myenv/prepare_provisioning.sh
 
