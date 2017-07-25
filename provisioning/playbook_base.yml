@@ -4,6 +4,7 @@
 
   vars:
     guest_user: "ubuntu"
+    guest_user_group: "ubuntu"
     zsh_user: "{{ guest_user }}"
     vagrant_dir: "/vagrant"
     myenv_dir: "{{ ansible_env.HOME }}/myenv"
@@ -12,6 +13,7 @@
     - system
     - zsh
     - vim
+    - aws_cli
     - { role: rvm1-ansible,
         tags: ruby,
         rvm1_rubies: ["ruby-2.4", "ruby-2.3"],

@@ -1,0 +1,26 @@
+---
+
+- name: Install pip
+  tags: aws-cli
+  apt: >
+    pkg=python-pip
+    state=installed
+  become: yes
+
+- name: Install AWS CLI
+  tags: aws-cli
+  become: yes
+  pip: >
+    name=awscli
+    state=latest
+
+- name: Create the AWS config directory
+  tags: aws-cli
+  become: yes
+  file: >
+    path={{ ansible_env.HOME }}/.aws
+    state=directory
+    owner={{ guest_user }}
+    group={{ guest_user_group }}
+    mode=0755
+
