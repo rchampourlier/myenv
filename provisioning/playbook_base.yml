@@ -2,12 +2,11 @@
 
 - hosts: all
 
-  vars:
-    guest_user: "ubuntu"
-    zsh_user: "{{ guest_user }}"
-    vagrant_dir: "/vagrant"
-    myenv_dir: "{{ ansible_env.HOME }}/myenv"
-    node_package: "node-v8.2.1-linux-x64"
+  pre_tasks:
+    - include_vars: "{{ item }}"
+      with_fileglob:
+        - playbook_config.yml
+      tags: ['always']
 
   roles:
     - system
@@ -18,16 +17,20 @@
         rvm1_rubies: ["ruby-2.4", "ruby-2.3"],
         rvm1_user: "{{ guest_user }}"
       }
-    - {
-        role: ansible-go,
-        become: yes
+    - { role: ansible-go,
+        become: true,
+        when: not env_macos
       }
-    - vim_plugins
     - {
         role: node,
-        become: yes
+        become: yes,
+        when: not env_macos
+      }
+    - { role: macos_packages,
+        when: env_macos
       }
     - go_additions
+    - vim_plugins
 
   tasks:
     - include: tasks/timezone.yml

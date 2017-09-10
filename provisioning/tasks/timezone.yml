@@ -3,3 +3,4 @@
 - name: Set timezone to Paris
   command: timedatectl set-timezone Europe/Paris
   become: true
+  when: not env_macos

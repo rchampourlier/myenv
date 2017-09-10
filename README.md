@@ -27,6 +27,21 @@ If you want to have several environment, e.g. one for work, one for personal pro
 /some/path/work
 /some/path/personal
 
+### On a MacOS host
+
+Prerequisites:
+
+- Working installation of Homebrew.
+
+```
+cd ~
+git clone https://github.com/rchampourlier/myenv.git
+myenv/provisioning/scripts/install_deps_osx.sh
+myenv/prepare_provisioning.sh
+myenv/provisioning/scripts/ansible_base.sh
+
+```
+
 ### On a local VM (using Vagrant and VirtualBox provider)
 
 ```

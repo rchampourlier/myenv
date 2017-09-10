@@ -9,7 +9,7 @@ git clone https://github.com/rchampourlier/myenv.git $HOME/myenv
 cd $HOME/myenv && git fetch && git checkout $MYENV_BRANCH
 
 echo "Creating a dev directory"
-mkdir $HOME/dev
+mkdir -p $HOME/dev
 cd $HOME/dev
 
 echo "Prepare provisioning"
