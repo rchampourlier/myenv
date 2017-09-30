@@ -1,3 +1,5 @@
 [user]
 	email = public@rchampourlier.com
 	name = Romain Champourlier
+[push]
+	default = simple

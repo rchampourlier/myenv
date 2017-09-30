@@ -1,7 +1,6 @@
 ---
 
 - hosts: all
-
   pre_tasks:
     - include_vars: "{{ item }}"
       with_fileglob:
@@ -12,6 +11,7 @@
     - system
     - zsh
     - vim
+    - aws_cli
     - { role: rvm1-ansible,
         tags: ruby,
         rvm1_rubies: ["ruby-2.4", "ruby-2.3"],
@@ -22,7 +22,12 @@
         when: not env_macos
       }
     - {
-        role: node,
+        role: ansible-nvm,
+        nvm: {
+          user: "{{ guest_user }}",
+          version: 'v0.33.2',
+          node_version: 'v6.11.0'
+        },
         become: yes,
         when: not env_macos
       }

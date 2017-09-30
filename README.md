@@ -94,6 +94,8 @@ Host myenv
 This replays the Ansible playbooks:
 
 ```
+$HOME/myenv/provisioning/scripts/ansible_base.sh
+$HOME/myenv/provisioning/scripts/ansible_server.sh
 ```
 
 ## Troubleshooting

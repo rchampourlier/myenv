@@ -8,7 +8,7 @@ export VISUAL=vim
 export EDITOR="$VISUAL"
 
 # Use the correct font icons (must be before prezto/init)
-POWERLEVEL9K_MODE='awesome-patched'
+# POWERLEVEL9K_MODE='awesome-patched'
 
 # Source Prezto
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
@@ -19,7 +19,7 @@ fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Source font variables
-source "${ZDOTDIR:-$HOME}/myenv/fonts/Droid+Sans+Mono+Awesome.sh"
+# source "${ZDOTDIR:-$HOME}/myenv/fonts/Droid+Sans+Mono+Awesome.sh"
 
 # ============================================
 # ZSH: customization
@@ -97,5 +97,9 @@ export PATH=$GOPATH/bin:$PATH
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
 
-# Load RVM
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
+# Load RVM: this loads RVM into a shell session.
+alias source-rvm='[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"'
+
+# Load NVM (using an alias because it's taking too long
+# to be done with every shell opening.
+alias source-nvm='source ~/.nvm/nvm.sh'

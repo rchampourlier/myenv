@@ -7,13 +7,14 @@
       - fail2ban
       - ufw
       - unattended-upgrades
-
     ubuntu_common_optional_packages:
       - mosh
-
     ubuntu_common_ssh_port: 22
     ubuntu_common_mosh_from_port: 60000
     ubuntu_common_mosh_to_port: 60010
+    dev_servers_ports:
+      - 3000
+      - 9292
 
   tasks:
     - name: Ensure aptitude is installed
@@ -35,7 +36,7 @@
 
     - name: Install optional packages
       apt: state=installed pkg={{ item }}
-      with_items: "{{ ubuntu_common_required_packages }}"
+      with_items: "{{ ubuntu_common_optional_packages }}"
       become: true
 
     - name: Adjust APT update intervals
@@ -43,7 +44,7 @@
       become: true
 
     - name: Allow ssh traffic
-      ufw: rule=allow port="{{ ubuntu_common_ssh_port }}" proto=tcp
+      ufw: "rule=allow port={{ ubuntu_common_ssh_port }} proto=tcp"
       become: true
 
     - name: Setup ufw
@@ -51,8 +52,13 @@
       become: true
 
     - name: Allow mosh traffic
-      ufw: rule=allow proto=udp port="{{ ubuntu_common_mosh_from_port }}:{{ ubuntu_common_mosh_to_port }}"
+      ufw: "rule=allow proto=udp port={{ ubuntu_common_mosh_from_port }}:{{ ubuntu_common_mosh_to_port }}"
       when: "'mosh' in ubuntu_common_optional_packages"
+      become: true
+
+    - name: Allow dev servers traffic
+      ufw: "rule=allow proto=tcp port={{ item }}"
+      with_items: "{{ dev_servers_ports }}"
       become: true
 
     - name: Disallow password authentication
@@ -60,7 +66,6 @@
                   regexp="^PasswordAuthentication"
                   line="PasswordAuthentication no"
                   state=present
-      # notify: Restart ssh # only restarting for the last task
       become: true
 
     - name: Disallow root SSH access
@@ -68,7 +73,6 @@
                   regexp="^PermitRootLogin"
                   line="PermitRootLogin no"
                   state=present
-      # notify: Restart ssh # only restarting for the last task
       become: true
 
     - name: Enable key forwarding
