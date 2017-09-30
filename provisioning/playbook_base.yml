@@ -10,6 +10,7 @@
   roles:
     - system
     - zsh
+    - rupa_z
     - vim
     - aws_cli
     - { role: rvm1-ansible,
