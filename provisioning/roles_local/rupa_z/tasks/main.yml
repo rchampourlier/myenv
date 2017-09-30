@@ -1,0 +1,9 @@
+---
+
+- name: Install rupa/z from git
+  git:
+    repo: https://github.com/rupa/z.git
+    dest: "{{ ansible_env.HOME }}/.rupa_z"
+    force: true
+    update: true
+

@@ -84,6 +84,11 @@ alias tmux='tmux -S /tmp/tmux_default_socket'
 export FZF_DEFAULT_COMMAND='ag -g ""'
 
 # ============================================
+# RUPA/Z
+# ============================================
+. $HOME/.rupa_z/z.sh
+
+# ============================================
 # GO
 # ============================================
 export PATH=$PATH:/usr/local/go/bin
@@ -99,6 +104,10 @@ export PATH="$PATH:$HOME/.rvm/bin"
 
 # Load RVM: this loads RVM into a shell session.
 alias source-rvm='[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"'
+
+# ============================================
+# NODE
+# ============================================
 
 # Load NVM (using an alias because it's taking too long
 # to be done with every shell opening.

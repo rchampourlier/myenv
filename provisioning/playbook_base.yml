@@ -1,5 +1,4 @@
---
-
+---
 
 - hosts: all
   pre_tasks:
@@ -11,6 +10,7 @@
   roles:
     - system
     - zsh
+    - rupa_z
     - vim
     - aws_cli
     - { role: ansible-role-docker,
