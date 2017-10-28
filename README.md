@@ -98,6 +98,10 @@ $HOME/myenv/provisioning/scripts/ansible_base.sh
 $HOME/myenv/provisioning/scripts/ansible_server.sh
 ```
 
+### Use Pass
+
+[Pass](https://www.passwordstore.org/) is installed for password management. The storage must be retrieved manually, as well as the GPG secret key.
+
 ## Troubleshooting
 
 ### Ansible setup failing at 1st run
