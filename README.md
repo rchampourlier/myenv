@@ -23,9 +23,9 @@ The environment is provisioned with my personal setup:
 
 If you want to have several environment, e.g. one for work, one for personal projects, you can have the following directories:
 
-/some/path/myenv
-/some/path/work
-/some/path/personal
+- `/some/path/myenv`
+- `/some/path/work`
+- `/some/path/personal`
 
 ### On a MacOS host
 
@@ -46,9 +46,9 @@ myenv/provisioning/scripts/ansible_base.sh
 
 ```
 # Init
-git clone https://github.com/rchampourlier/myenv.git /some/path/myenv
+git clone https://github.com/rchampourlier/myenv.git $HOME/myenv
 cd /some/path/work
-../myenv/init_vagrant.sh
+$HOME/myenv/init_vagrant.sh
 
 # Connect
 vagrant ssh
@@ -104,7 +104,10 @@ $HOME/myenv/provisioning/scripts/ansible_server.sh
 
 When you run the `start_remote` and `start_vagrant` scripts for the 1st time on a given machine, the Ansible provisioning script may fail before the end. This is due to the fact that some tasks require some prerequisites installed by Ansible to be loaded. For now, the solution is to log out and log in back and replay the provisioning scripts (see "Update / replay provisioning" above).
 
-A more appropriate solution would be to split the provisioning in two phases, 1. bootstrapping, 2. provisioning, and logout/login after bootstrapping.
+A more appropriate solution would be to split the provisioning in two phases:
+
+1. bootstrapping,
+2. provisioning, and logout/login after bootstrapping.
 
 ## Known limitations
 
