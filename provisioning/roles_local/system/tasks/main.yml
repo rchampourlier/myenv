@@ -6,7 +6,19 @@
     state: present
   with_items:
     - htop
-    - "{{ ag_package }}"
+    - silversearcher-ag
     - ctags
     - pass
   become: yes
+  when: not env_macos
+
+- name: Install common system components
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - htop
+    - the_silver_searcher
+    - ctags
+    - pass
+  when: env_macos

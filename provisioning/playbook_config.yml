@@ -8,12 +8,10 @@ guest_user_group: "{{ 'admin' if env_macos else ansible_env.USER }}"
 zsh_user: "{{ guest_user }}"
 myenv_dir: "{{ ansible_env.HOME }}/myenv"
 node_package: "node-v8.2.1-linux-x64"
-ag_package: "{{ 'the_silver_searcher' if env_macos else 'silversearcher-ag' }}"
 
 # new vars
 user: "{{ guest_user }}"
 user_zsh: "{{ zsh_user }}"
 dir_myenv: "{{ myenv_dir }}"
 package_node: "{{ node_package }}"
-package_ag: "{{ ag_package }}"
 
