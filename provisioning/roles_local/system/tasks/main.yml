@@ -8,3 +8,5 @@
     - htop
     - "{{ ag_package }}"
     - ctags
+    - pass
+  become: yes
