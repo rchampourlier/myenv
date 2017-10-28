@@ -12,7 +12,9 @@
     - zsh
     - rupa_z
     - vim
-    - aws_cli
+    - { role: aws_cli,
+        when: not env_macos
+      }
     - { role: rvm1-ansible,
         tags: ruby,
         rvm1_rubies: ["ruby-2.4", "ruby-2.3"],
