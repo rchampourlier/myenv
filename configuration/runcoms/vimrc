@@ -109,6 +109,9 @@ autocmd Filetype help nnoremap <buffer> q :q<CR>
 " rebind omnicompletion to <C-o>
 imap <C-o> <C-x><C-o>
 
+" format JSON using <leader>jt
+map <leader>jt  <Esc>:%!json_xs -f json -t json-pretty<CR>
+
 " Plugins config
 """"""""""""""""
 
