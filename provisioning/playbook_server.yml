@@ -13,9 +13,10 @@
     ubuntu_common_mosh_from_port: 60000
     ubuntu_common_mosh_to_port: 60010
     dev_servers_ports:
-      - 3000
-      - 8080
-      - 9292
+      - 3000 # misc
+      - 8079 # rubix-webpack
+      - 8080 # rubix-node
+      - 9292 # misc
 
   tasks:
     - name: Ensure aptitude is installed
