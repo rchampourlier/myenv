@@ -102,6 +102,14 @@ $HOME/myenv/provisioning/scripts/ansible_server.sh
 
 [Pass](https://www.passwordstore.org/) is installed for password management. The storage must be retrieved manually, as well as the GPG secret key.
 
+### Use nvm
+
+To use nvm, you must source it first:
+
+    source-nvm
+
+It's not sourced by default to prevent slowing down of the terminal loading.
+
 ## Troubleshooting
 
 ### Ansible setup failing at 1st run
