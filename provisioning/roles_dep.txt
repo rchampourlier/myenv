@@ -1,4 +1,3 @@
 https://github.com/rvm/rvm1-ansible
 https://github.com/jlund/ansible-go
 https://github.com/Wtower/ansible-nvm
-https://github.com/mongrelion/ansible-role-docker
