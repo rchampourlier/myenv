@@ -27,9 +27,12 @@ Plug 'majutsushi/tagbar'
 Plug 'fatih/vim-go'
 Plug 'vim-jp/vim-go-extra' " for :Fmt
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
-"
+
 " for elm
 Plug 'elmcast/elm-vim'
+
+" for typescript
+Plug 'leafgarland/typescript-vim'
 
 call plug#end()
 
