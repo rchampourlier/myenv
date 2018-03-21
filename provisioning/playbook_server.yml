@@ -10,7 +10,7 @@
       - logwatch
     ubuntu_common_optional_packages:
       - mosh
-    ubuntu_common_ssh_port: 6677
+    ubuntu_common_ssh_port: 22
     ubuntu_common_mosh_from_port: 60000
     ubuntu_common_mosh_to_port: 60010
     ubuntu_common_logwatch_email: public@rchampourlier.com
@@ -42,12 +42,26 @@
       copy: src=support/apt_periodic dest=/etc/apt/apt.conf.d/10periodic
       become: true
 
+    - name: Set ufw config for Scaleway
+      ufw: 
+        policy: allow
+        logging: off
+      become: true
+
+    - name: Append drop-all rule
+      lineinfile: dest=/etc/ufw/after.rules
+                  regexp="^-A ufw-reject-input"
+                  line="-A ufw-reject-input -j DROP"
+                  state=present
+                  insertbefore="^COMMIT"
+      become: true
+
     - name: Allow ssh traffic
       ufw: "rule=allow port={{ ubuntu_common_ssh_port }} proto=tcp"
       become: true
 
     - name: Setup ufw
-      ufw: state=enabled policy=deny
+      ufw: state=enabled
       become: true
 
     - name: Allow mosh traffic
@@ -66,15 +80,17 @@
 
     - name: Email log summary daily
       lineinfile: dest=/etc/cron.daily/00logwatch
-		  regexp="^/usr/sbin/logwatch"
-		  line="/usr/sbin/logwatch --output mail --mailto {{ UBUNTU_COMMON_LOGWATCH_EMAIL }} --detail high"
-		  state=present create=yes 
+                  regexp="^/usr/sbin/logwatch"
+                  line="/usr/sbin/logwatch --output mail --mailto {{ ubuntu_common_logwatch_email }} --detail high"
+                  state=present create=yes 
+      become: true
 
     - name: Change ssh port
       lineinfile: dest=/etc/ssh/sshd_config
-		  regexp="^Port\s"
-		  line="Port {{ ubuntu_common_ssh_port }}"
-		  state=present
+                  regexp="^Port\s"
+                  line="Port {{ ubuntu_common_ssh_port }}"
+                  state=present
+      become: true
       notify: Restart ssh
 
     - name: Disallow password authentication
@@ -93,12 +109,21 @@
 
     - name: Enable key forwarding
       lineinfile: dest=/etc/ssh/sshd_config
-                   regexp="^AllowAgentForwarding"
-                   line="AllowAgentForwarding yes"
-                   state=present
+                  regexp="^AllowAgentForwarding"
+                  line="AllowAgentForwarding yes"
+                  state=present
       notify: Restart ssh
       become: true
 
+    - name: Secure shared memory
+      lineinfile: dest=/etc/fstab
+                  regexp="^tmpfs"
+                  line="tmpfs /run/shm tmpfs defaults,noexec,nosuid 0 0"
+                  state=present
+                  insertafter=EOF
+                  #create=True
+      become: true
+               
   handlers:
     - name: Restart ssh
       service: name=ssh state=restarted
