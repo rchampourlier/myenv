@@ -35,13 +35,11 @@
   become: yes
   when: not env_macos
 
-- name: Get installed version
+- name: Check if installed
   command: >
     vim --version
-  changed_when: false
-  failed_when: false
-  check_mode: no
-  register: vim_installed_version
+  register: vim_version
+  ignore_errors: yes
 
 - name: Download vim from git
   git:
@@ -50,7 +48,7 @@
     track_submodules: true
     force: true
     update: false
-  when: (vim_installed_version|failed or env_macos)
+  when: (vim_version|failed or env_macos)
   # vim is installed by default on macOS and we won't uninstall it
   # like we did for ubuntu
 
@@ -61,7 +59,7 @@
     make &&
     make install
   become: yes
-  when: vim_installed_version|failed
+  when: (vim_version|failed or env_macos)
 
 - name: Create ~/.vim/autoload directory
   file: path="{{ ansible_env.HOME }}/.vim/autoload" state=directory

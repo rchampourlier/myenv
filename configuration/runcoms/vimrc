@@ -27,9 +27,12 @@ Plug 'majutsushi/tagbar'
 Plug 'fatih/vim-go'
 Plug 'vim-jp/vim-go-extra' " for :Fmt
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
-"
+
 " for elm
 Plug 'elmcast/elm-vim'
+
+" for typescript
+Plug 'leafgarland/typescript-vim'
 
 call plug#end()
 
@@ -44,6 +47,10 @@ set number
 " Tabs & indentation for Golang
 autocmd FileType go setlocal shiftwidth=8 tabstop=8 softtabstop=8
 autocmd FileType go setlocal noexpandtab
+
+" search
+set incsearch
+set hlsearch
 
 " solarized theme
 """""""""""""""""
@@ -97,11 +104,6 @@ inoremap <expr> <S-Space> (pumvisible() ? (col('.') > 1 ? '<Esc>i<Right>' : '<Es
 " the plugins.
 let mapleader=","
 
-" escapes from insert mode
-imap jk <esc>
-imap kj <esc>
-imap <C-s> <esc>:w<cr>
-
 " Bind `t` to go to topic in help files
 autocmd Filetype help nnoremap t <C-]>
 autocmd Filetype help nnoremap <buffer> q :q<CR>
@@ -111,6 +113,13 @@ imap <C-o> <C-x><C-o>
 
 " format JSON using <leader>jt
 map <leader>jt  <Esc>:%!json_xs -f json -t json-pretty<CR>
+
+" navigate in linter (ale) errors
+nmap <silent> <leader>l  <Plug>(ale_previous_wrap)
+nmap <silent> <leader>L <Plug>(ale_next_wrap)
+
+" search
+nnoremap <CR> :noh<CR><CR>
 
 " Plugins config
 """"""""""""""""
