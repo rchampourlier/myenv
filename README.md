@@ -110,6 +110,23 @@ To use nvm, you must source it first:
 
 It's not sourced by default to prevent slowing down of the terminal loading.
 
+### Have copy-paste working between a macOS client and your server
+
+Update your host's `~/.ssh/config` file with the following section:
+
+```
+Host dev
+  HostName <HOSTNAME>
+  User ubuntu
+  ForwardAgent yes
+  ForwardX11 yes
+  XAuthLocation /opt/X11/bin/xauth
+```
+
+- Install XQuartz
+- Replace `<HOSTNAME>` with your server's hostname
+- Change the `XAuthLocation` depending on your SSH client's environment
+
 ## Troubleshooting
 
 ### Ansible setup failing at 1st run
