@@ -2,7 +2,7 @@
 
 Build your development environment:
 
-- Use Vagrant to contain your environment inside a dedicated machine (local VM, remote server...)
+- On your local machine (macOS only) or in Vagrant to contain your environment inside a dedicated machine (local VM, remote server...)
 - Provision the environment using Ansible (for programs, libraries, development tools...)
 - Load your dotfiles directly from the repo
 
@@ -16,8 +16,8 @@ The environment is provisioned with my personal setup:
 
 ## Prerequisites
 
-- Vagrant must be installed and working with a default provider.
-- You should user iTerm as a terminal application on MacOS X. To have your tmux buffer automatically copied to your macOS' clipboard, simply enable the "Applications in terminal may access clipboard" option in iTerm.
+- You should use iTerm as a terminal application on MacOS X. To have your tmux buffer automatically copied to your macOS' clipboard, simply enable the "Applications in terminal may access clipboard" option in iTerm.
+- If you want to develop within Vagrant, it must be installed and working with a default provider.
 
 ## Getting started
 
