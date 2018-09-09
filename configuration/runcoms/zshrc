@@ -123,8 +123,13 @@ rbenv() {
 
 #============================================
 # NODE
-# ============================================
+#============================================
 
 # Load NVM (using an alias because it's taking too long
 # to be done with every shell opening.
 alias source-nvm='source ~/.nvm/nvm.sh'
+
+#============================================
+# PINENTRY AND GPG-AGENT
+#============================================
+alias start-gpg-agent='gpg-agent --daemon --pinentry-program /usr/local/bin/pinentry'
