@@ -7,17 +7,13 @@
       - fail2ban
       - ufw
       - unattended-upgrades
+      - logwatch
     ubuntu_common_optional_packages:
       - mosh
     ubuntu_common_ssh_port: 22
     ubuntu_common_mosh_from_port: 60000
     ubuntu_common_mosh_to_port: 60010
-    dev_servers_ports:
-      - 3000 # misc
-      - 8000 # elm-reactor
-      - 8079 # rubix-webpack
-      - 8080 # rubix-node
-      - 9292 # misc
+    ubuntu_common_logwatch_email: public@rchampourlier.com
 
   tasks:
     - name: Ensure aptitude is installed
@@ -46,12 +42,26 @@
       copy: src=support/apt_periodic dest=/etc/apt/apt.conf.d/10periodic
       become: true
 
+    - name: Set ufw config for Scaleway
+      ufw: 
+        policy: allow
+        logging: off
+      become: true
+
+    - name: Append drop-all rule
+      lineinfile: dest=/etc/ufw/after.rules
+                  regexp="^-A ufw-reject-input"
+                  line="-A ufw-reject-input -j DROP"
+                  state=present
+                  insertbefore="^COMMIT"
+      become: true
+
     - name: Allow ssh traffic
       ufw: "rule=allow port={{ ubuntu_common_ssh_port }} proto=tcp"
       become: true
 
     - name: Setup ufw
-      ufw: state=enabled policy=deny
+      ufw: state=enabled
       become: true
 
     - name: Allow mosh traffic
@@ -59,10 +69,29 @@
       when: "'mosh' in ubuntu_common_optional_packages"
       become: true
 
-    - name: Allow dev servers traffic
-      ufw: "rule=allow proto=tcp port={{ item }}"
-      with_items: "{{ dev_servers_ports }}"
+    - name: Set up Postfix to relay mail
+      debconf: name=postfix
+               question='{{ item.question }}'
+               value='{{ item.value }}'
+               vtype='{{ item.vtype }}'
+      with_items:
+        - { question: 'postfix/mailname', value: '{{ ansible_fqdn }}', vtype: 'string' }
+        - { question: 'postfix/main_mailer_type', value: 'Internet Site', vtype: 'string' }
+
+    - name: Email log summary daily
+      lineinfile: dest=/etc/cron.daily/00logwatch
+                  regexp="^/usr/sbin/logwatch"
+                  line="/usr/sbin/logwatch --output mail --mailto {{ ubuntu_common_logwatch_email }} --detail high"
+                  state=present create=yes 
       become: true
+
+    - name: Change ssh port
+      lineinfile: dest=/etc/ssh/sshd_config
+                  regexp="^Port\s"
+                  line="Port {{ ubuntu_common_ssh_port }}"
+                  state=present
+      become: true
+      notify: Restart ssh
 
     - name: Disallow password authentication
       lineinfile: dest=/etc/ssh/sshd_config
@@ -80,12 +109,21 @@
 
     - name: Enable key forwarding
       lineinfile: dest=/etc/ssh/sshd_config
-                   regexp="^AllowAgentForwarding"
-                   line="AllowAgentForwarding yes"
-                   state=present
+                  regexp="^AllowAgentForwarding"
+                  line="AllowAgentForwarding yes"
+                  state=present
       notify: Restart ssh
       become: true
 
+    - name: Secure shared memory
+      lineinfile: dest=/etc/fstab
+                  regexp="^tmpfs"
+                  line="tmpfs /run/shm tmpfs defaults,noexec,nosuid 0 0"
+                  state=present
+                  insertafter=EOF
+                  #create=True
+      become: true
+               
   handlers:
     - name: Restart ssh
       service: name=ssh state=restarted
