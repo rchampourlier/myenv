@@ -103,7 +103,7 @@ export PATH=$GOPATH/bin:$PATH
 
 export PATH="/Users/rchampourlier/.rbenv/shims:${PATH}"
 export RBENV_SHELL=zsh
-source '/usr/local/Cellar/rbenv/1.1.1/libexec/../completions/rbenv.zsh'
+# source '/usr/local/Cellar/rbenv/1.1.1/libexec/../completions/rbenv.zsh'
 command rbenv rehash 2>/dev/null
 rbenv() {
   local command

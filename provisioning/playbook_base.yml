@@ -12,31 +12,27 @@
     - zsh
     - rupa_z
     - vim
-    - { role: aws_cli,
+    - role: aws_cli
       when: not env_macos
-      }
-    - { role: rvm1-ansible,
-        tags: ruby,
-        rvm1_rubies: ["ruby-2.4", "ruby-2.3"],
-        rvm1_user: "{{ guest_user }}"
-      }
-    - { role: ansible-go,
-        become: true,
-        when: not env_macos
-      }
-    - {
-        role: ansible-nvm,
-        nvm: {
-          user: "{{ guest_user }}",
-          version: 'v0.33.2',
-          node_version: 'v6.11.0'
-        },
-        become: yes,
-        when: not env_macos
-      }
-    - { role: macos_packages,
-        when: env_macos
-      }
+    - role: ansible-rbenv-role
+      rbenv:
+        env: user
+        default_ruby: 2.4.2
+        rubies:
+          - version: 2.4.2
+        become: true
+    - role: ansible-go
+      become: true
+      when: not env_macos
+    - role: ansible-nvm
+      nvm:
+        user: "{{ guest_user }}"
+        version: 'v0.33.2'
+        node_version: 'v6.11.0'
+      become: yes
+      when: not env_macos
+    - role: macos_packages
+      when: env_macos
     - go_additions
     - vim_plugins
 

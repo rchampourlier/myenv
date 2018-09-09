@@ -9,7 +9,7 @@ Build your development environment:
 The environment is provisioned with my personal setup:
 
 - Shell: zsh, prezto and powerlevel9k
-- Some Ruby versions (using RVM)
+- Some Ruby versions (using rbenv)
 - Vim (8, installed from the source). With vim-plug and custom settings.
 
 **NB: this environment is provisioned _for me_! Though you could totally use it to build your own environment, I recommend you to fork it and adjust it to your needs.**
@@ -79,12 +79,20 @@ Host myenv
 
 ## How to...
 
+### Add a new component using Ansible
+
+If you have an Ansible role (e.g. opensource):
+
+- Add the role's URL to `provisioning/roles_dep.txt`
+- Run `prepare_provisioning.sh`
+- Reprovision with `myenv/provisioning/scripts/ansible_base.sh`
+
 ### Add a vim plugin
 
 - Edit `configuration/runcoms/vimrc` and add the desired `Plug...` in the "Load plugins" section.
 - Run `vagrant provision` (on the host)
 
-### Install a new Ubuntu package
+### Install a new system package
 
 - If it's a system common package, add it to `provisioning/roles_local/system`.
 - Otherwise, create the appropriate role and add it to `provisioning/playbook.yml`.
