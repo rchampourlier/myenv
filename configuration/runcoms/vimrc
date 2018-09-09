@@ -134,10 +134,8 @@ let g:lightline = {
       \ 'component_function': {
       \   'readonly': 'MyReadonly',
       \   'filename': 'MyFilename',
-      \ },
-      \ 'separator': { 'left': '⮀', 'right': '⮂' },
-      \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
       \ }
+      \}
 
 function! MyReadonly()
   if &filetype == "help"
