@@ -1,5 +1,10 @@
 ---
 
+- name: Source go-bin.sh
+  shell: source /etc/profile.d/go-bin.sh
+  args:
+    executable: /bin/bash
+
 - name: Install some additions for Golang
   command: go get -u github.com/nsf/gocode
 
