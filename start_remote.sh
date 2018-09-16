@@ -28,8 +28,8 @@ curl $REPO/provisioning/scripts/install_deps.sh?$TIME > install_deps.sh
 # Provision base
 echo "export MYENV_BRANCH=$MYENV_BRANCH" > provision_base.sh
 curl $REPO/provisioning/scripts/provision_base.sh?$TIME >> provision_base.sh
-cat provision_base.sh | su - $GUEST_USER
+sudo /bin/bash provision_base.sh
 
 # Provision server
 curl $REPO/provisioning/scripts/provision_server.sh?$TIME > provision_server.sh
-cat provision_server.sh | su - $GUEST_USER
+sudo /bin/bash provision_server.sh
