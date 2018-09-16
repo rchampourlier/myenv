@@ -112,7 +112,8 @@ This subkey will be sent to the server so it can be revoked if it leaks.
 
 #### Password store
 
-Clone PasswordStore repository into ~/.password-store.
+- Clone PasswordStore repository into ~/.password-store.
+- Test you can correctly decrypt passwords. The GPG subkeys imported earlier should work.
 
 ## How to...
 
