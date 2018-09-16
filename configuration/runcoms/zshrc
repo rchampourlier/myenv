@@ -130,6 +130,7 @@ rbenv() {
 alias source-nvm='source ~/.nvm/nvm.sh'
 
 #============================================
-# PINENTRY AND GPG-AGENT
+# GPG
 #============================================
-alias start-gpg-agent='gpg-agent --daemon --pinentry-program /usr/local/bin/pinentry'
+# Fix for: clear-sign failed: Inappropriate ioctl for device
+export GPG_TTY=$(tty)
