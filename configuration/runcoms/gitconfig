@@ -1,7 +1,7 @@
 [user]
 	email = public@rchampourlier.com
 	name = Romain Champourlier
-	signingkey = 4CDA7FE866D03D97
+	signingkey = 369BBA86
 [push]
 	default = simple
 [commit]
