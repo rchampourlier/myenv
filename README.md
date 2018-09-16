@@ -62,8 +62,7 @@ curl https://raw.githubusercontent.com/rchampourlier/myenv/$MYENV_BRANCH/start_v
 ### On a remote server
 
 ```
-# Connected as root
-export GUEST_USER=ubuntu
+# Connected as the guest user (e.g. `ubuntu`)
 export MYENV_BRANCH=master
 curl https://raw.githubusercontent.com/rchampourlier/myenv/$MYENV_BRANCH/start_remote.sh > start_remote.sh && /bin/bash start_remote.sh
 ```
