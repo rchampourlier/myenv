@@ -1,6 +1,6 @@
 ---
 
-- name: Install go with Homebrew
+- name: Install go and node with Homebrew
   package:
     name: "{{ item }}"
     state: present

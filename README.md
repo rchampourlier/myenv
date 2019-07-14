@@ -111,6 +111,8 @@ $HOME/myenv/provisioning/scripts/ansible_server.sh
 
 ### Use nvm
 
+_NB: nvm is not provisioned on macOS, Node is installed directly through Homebrew instead._
+
 To use nvm, you must source it first:
 
     source-nvm
