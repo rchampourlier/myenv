@@ -76,6 +76,45 @@ Host myenv
   ForwardAgent yes
 ```
 
+### Manual finish
+
+#### SSH keys
+
+- Generate SSH keys for Github, Gitlab and Bitbucket with `ssh-keygen -t rsa -b 4096 -C "email@host+service"`
+- Add the generated public keys to each service
+
+#### GPG keys
+
+**1. Create a subkey from your master key**
+
+This subkey will be sent to the server so it can be revoked if it leaks.
+
+1. Find your key ID: `gpg --list-keys yourname`.
+2. `gpg --edit-key YOURMASTERKEYID`.
+3. At the gpg> prompt: `addkey`.
+4. This asks for your passphrase, type it in.
+5. Choose the "RSA (sign only)" key type.
+6. It would be wise to choose 4096 (or 2048) bit key size.
+7. Once your done, be sure to type `save`
+
+(NB: tutorial from https://wiki.debian.org/Subkeys)
+
+**2. Find the subkey ID**
+
+1. `gpg --edit-key YOURMASTERKEYID`
+2. You should find the new subkey in the list with its ID following `rsa4096`
+   if you chose this algo/size.
+3. Export the subkeys: `gpg --output $HOME/subkeys.gpg --export-secret-subkeys SUBKEY_ID`
+4. Copy the exported subkeys to the server: `scp $HOME/subkeys.gpg $GUEST_USER@$HOST:~/subkeys.gpg`
+5. On the remote server, import the subkeys: `gpg --import subkeys.gpg && gpg2 --import subkeys.gpg`
+6. Check on the server that `gpg -K` displays `sec#` and not `sec`, meaning the secret key is not
+   present for your master key.
+
+#### Password store
+
+- Clone PasswordStore repository into ~/.password-store.
+- Test you can correctly decrypt passwords. The GPG subkeys imported earlier should work.
+
 ## How to...
 
 ### Add a new component using Ansible
