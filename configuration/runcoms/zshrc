@@ -134,3 +134,5 @@ alias source-nvm='source ~/.nvm/nvm.sh'
 #============================================
 # Fix for: clear-sign failed: Inappropriate ioctl for device
 export GPG_TTY=$(tty)
+
+alias emacs='emacs --no-window-system'
