@@ -1,9 +1,9 @@
 ---
 
-- name: Install go and node with Homebrew
+- name: Install development packages
   package:
     name: "{{ item }}"
-    state: present
+    state: latest
   with_items:
     - go
     - node

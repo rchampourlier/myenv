@@ -1,40 +1,5 @@
 ---
 
-- name: Uninstall apt vim
-  package:
-    name: "{{ item }}"
-    state: absent
-  with_items:
-    - vim
-    - vim-runtime
-    - gvim
-    - vim-tiny
-    - vim-common
-    - vim-gui
-    - vim-nox
-  become: yes
-  when: not env_macos
-
-- name: Ensure build dependencies are installed
-  package:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - build-essential
-    - gcc
-    - libncurses-dev
-  become: yes
-  when: not env_macos
-
-- name: Ensure vim dependencies are installed
-  package:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - libncurses-dev
-  become: yes
-  when: not env_macos
-
 - name: Check if installed
   command: >
     vim --version
@@ -48,9 +13,7 @@
     track_submodules: true
     force: true
     update: false
-  when: (vim_version|failed or env_macos)
-  # vim is installed by default on macOS and we won't uninstall it
-  # like we did for ubuntu
+  when: (vim_version is failed)
 
 - name: Install vim from source
   shell: >
@@ -59,7 +22,7 @@
     make &&
     make install
   become: yes
-  when: (vim_version|failed or env_macos)
+  when: (vim_version is failed)
 
 - name: Create ~/.vim/autoload directory
   file: path="{{ ansible_env.HOME }}/.vim/autoload" state=directory

@@ -1,8 +1,8 @@
 # myenv (another development environment setup option)
 
-Build your development environment:
+Build your development environment on a macOS machine:
 
-- On your local machine (macOS only) or in Vagrant to contain your environment inside a dedicated machine (local VM, remote server...)
+- On your local machine to contain your environment inside a dedicated machine (local VM, remote server...)
 - Provision the environment using Ansible (for programs, libraries, development tools...)
 - Load your dotfiles directly from the repo
 
@@ -27,9 +27,7 @@ If you want to have several environment, e.g. one for work, one for personal pro
 - `/some/path/work`
 - `/some/path/personal`
 
-### On a MacOS host
-
-Prerequisites:
+**Prerequisites:**
 
 - Working installation of Homebrew.
 
@@ -40,40 +38,6 @@ myenv/provisioning/scripts/install_deps_osx.sh
 myenv/prepare_provisioning.sh
 myenv/provisioning/scripts/ansible_base.sh
 
-```
-
-### On a local VM (using Vagrant and VirtualBox provider)
-
-```
-# Init
-git clone https://github.com/rchampourlier/myenv.git $HOME/myenv
-cd /some/path/work
-$HOME/myenv/init_vagrant.sh
-
-# Connect
-vagrant ssh
-
-# On the guest, connected as ubuntu ($GUEST_USER)
-export GUEST_USER=ubuntu
-export MYENV_BRANCH=master
-curl https://raw.githubusercontent.com/rchampourlier/myenv/$MYENV_BRANCH/start_vagrant.sh > start_vagrant.sh && /bin/bash start_vagrant.sh
-```
-
-### On a remote server
-
-```
-# Connected as the guest user (e.g. `ubuntu`)
-export MYENV_BRANCH=master
-curl https://raw.githubusercontent.com/rchampourlier/myenv/$MYENV_BRANCH/start_remote.sh > start_remote.sh && /bin/bash start_remote.sh
-```
-
-To connect easily and forward your SSH keys, edit your `~/.ssh/config` file and add this:
-
-```
-Host myenv
-  Hostname 123.456.789.012
-  User ubuntu
-  ForwardAgent yes
 ```
 
 ### Manual finish
@@ -144,47 +108,18 @@ $HOME/myenv/provisioning/scripts/ansible_base.sh
 $HOME/myenv/provisioning/scripts/ansible_server.sh
 ```
 
+You should also regularly update the Ansible recipes depended on. For this,
+replay the `prepare_provisioning` script:
+
+```
+$HOME/myenv/prepare_provisioning
+```
+
 ### Use Pass
 
 [Pass](https://www.passwordstore.org/) is installed for password management. The storage must be retrieved manually, as well as the GPG secret key.
 
-### Use nvm
-
-_NB: nvm is not provisioned on macOS, Node is installed directly through Homebrew instead._
-
-To use nvm, you must source it first:
-
-    source-nvm
-
-It's not sourced by default to prevent slowing down of the terminal loading.
-
-### Have copy-paste working between a macOS client and your server
-
-Update your host's `~/.ssh/config` file with the following section:
-
-```
-Host dev
-  HostName <HOSTNAME>
-  User ubuntu
-  ForwardAgent yes
-  ForwardX11 yes
-  XAuthLocation /opt/X11/bin/xauth
-```
-
-- Install XQuartz
-- Replace `<HOSTNAME>` with your server's hostname
-- Change the `XAuthLocation` depending on your SSH client's environment
-
 ## Troubleshooting
-
-### Ansible setup failing at 1st run
-
-When you run the `start_remote` and `start_vagrant` scripts for the 1st time on a given machine, the Ansible provisioning script may fail before the end. This is due to the fact that some tasks require some prerequisites installed by Ansible to be loaded. For now, the solution is to log out and log in back and replay the provisioning scripts (see "Update / replay provisioning" above).
-
-A more appropriate solution would be to split the provisioning in two phases:
-
-1. bootstrapping,
-2. provisioning, and logout/login after bootstrapping.
 
 ## Known limitations
 

@@ -1,13 +1,5 @@
 ---
 
-- name: Install zsh
-  become: yes
-  become_user: root
-  package:
-    name: zsh
-    state: present
-  when: not env_macos
-
 - name: Set zsh as default shell
   become: yes
   become_user: root

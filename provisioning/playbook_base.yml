@@ -12,8 +12,6 @@
     - zsh
     - rupa_z
     - vim
-    - role: aws_cli
-      when: not env_macos
     - role: ansible-rbenv-role
       rbenv:
         env: user
@@ -21,22 +19,10 @@
         rubies:
           - version: 2.4.2
         become: true
-    - role: ansible-go
-      become: true
-      when: not env_macos
-    - role: ansible-nvm
-      nvm:
-        user: "{{ guest_user }}"
-        version: 'v0.33.2'
-        node_version: 'v6.11.0'
-      become: yes
-      when: not env_macos
-    - role: macos_packages
-      when: env_macos
+    - development_packages
     - go_additions
     - vim_plugins
 
   tasks:
-    - include: tasks/timezone.yml
     - include: tasks/reset_runcoms.yml
 
