@@ -3,7 +3,7 @@
 # Executes commands at the start of an interactive session.
 # ============================================
 
-export TERM=xterm-256color
+export TERM=xterm-256color # support 256+ colors
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
@@ -14,6 +14,10 @@ export EDITOR="$VISUAL"
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
+
+# ============================================
+# FZF
+# ============================================
 
 # Source fzf.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -91,7 +95,6 @@ export FZF_DEFAULT_COMMAND='ag -g ""'
 # ============================================
 # GO
 # ============================================
-export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$PATH
 
@@ -134,5 +137,3 @@ alias source-nvm='source ~/.nvm/nvm.sh'
 #============================================
 # Fix for: clear-sign failed: Inappropriate ioctl for device
 export GPG_TTY=$(tty)
-
-alias emacs='emacs --no-window-system'
