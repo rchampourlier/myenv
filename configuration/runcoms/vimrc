@@ -296,3 +296,4 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 " Plugin - vim-go
 let g:go_fmt_options = '-s -w'
+let g:go_metalinter_autosave = 1
