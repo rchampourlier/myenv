@@ -13,3 +13,4 @@ _Manual changes that were performed and not reported to the recipes here._
 - Add *coc* configuration for *gopls*.
 - Added *coc-snippets*
 - In neovim `:GoInstallBinaries` to install dependencies for vim-go
+- Install *gotags* and *tagbar*
