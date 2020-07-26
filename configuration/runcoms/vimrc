@@ -298,7 +298,7 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 " Plugin - vim-go
 let g:go_fmt_options = '-s -w'
-let g:go_metalinter_autosave = 1
+let g:go_metalinter_autosave = 0 " disabled because warns a lot and disturbs more than helps
 let g:go_mod_fmt_autosave = 0 " disabled because of false positive warning on missing package in mod file
 
 " Plugin - tagbar
