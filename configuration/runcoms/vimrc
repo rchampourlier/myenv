@@ -19,6 +19,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'} " completion engine
 Plug 'fatih/vim-go' " go tools
 Plug 'rizzatti/dash.vim' " dash integration
 Plug 'majutsushi/tagbar' " tagbar
+Plug 'brooth/far.vim' " find and replace
 
 call plug#end()
 
